@@ -3,8 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// builder.Services.AddDbContext<ToDoDbContext>(options =>
+//     options.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql")));
+
+
+
 builder.Services.AddDbContext<ToDoDbContext>(options => 
-    options.UseMySql("server=localhost;database=ToDoDB;user=root;password=yourpassword", 
+    options.UseMySql(connectionString, 
     Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql")));
 
 
