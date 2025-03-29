@@ -12,27 +12,53 @@ export default {
     catch(error){throw error}
   },
 
-  addTask: async(name, isComplete)=>{
-console.log('addTask', name)
-try{
-  const result=await axios1.post(`/item`,
-  {Name: name,
-    IsComplete:isComplete
-  }
-  )
-  console.log("adddd");
-    return {result};
-}
-catch (error) {
-  if (error.response && error.response.status === 404) {
-    console.error('Endpoint not found:', error.response.data);
-} else {
-    console.error('Failed to add task:', error);
+//   addTask: async(name, isComplete)=>{
+// console.log('addTask', name)
+// try{
+//   const result=await axios1.post(`/item`,
+//   {Name: name,
+//     IsComplete:isComplete
+//   }
+//   )
+//   console.log("adddd");
+//     return {result};
+// }
+// catch (error) {
+//   if (error.response && error.response.status === 404) {
+//     console.error('Endpoint not found:', error.response.data);
+// } else {
+//     console.error('Failed to add task:', error);
 
   
+//   }
+// }
+//   },
+
+
+addTask: async (name, isComplete) => {
+  console.log('addTask', name);
+
+  // בדוק אם השדות ריקים או לא תקינים
+  if (!name || typeof isComplete !== 'boolean') {
+      throw new Error('Invalid input: Name is required and IsComplete must be a boolean.');
   }
-}
-  },
+
+  try {
+      const result = await axios1.post("/item", {
+          Name: name,
+          IsComplete: isComplete
+      });
+      console.log("adddd");
+      return result; // אין צורך בסוגריים
+  } catch (error) {
+      if (error.response && error.response.status === 404) {
+          console.error('Endpoint not found:', error.response.data);
+      } else {
+          console.error('Failed to add task:', error);
+      }
+  }
+},
+
 
   setCompleted: async(id, isComplete)=>{
     console.log('setCompleted', {id, isComplete})
