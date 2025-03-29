@@ -13,9 +13,16 @@ options.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.P
     // options.UseMySql(connectionString, 
     // Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql")));
 
+// builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+// {
+//     builder.AllowAnyOrigin()
+//            .AllowAnyMethod()
+//            .AllowAnyHeader();
+// }));
+
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
-    builder.AllowAnyOrigin()
+    builder.WithOrigins("https://minimalapiclient-o9ta.onrender.com") // הוסף את המקור שלך כאן
            .AllowAnyMethod()
            .AllowAnyHeader();
 }));
