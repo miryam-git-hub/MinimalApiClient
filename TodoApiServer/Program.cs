@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("ToDoDB");
 // builder.Services.AddDbContext<ToDoDbContext>(options =>
 //     options.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.41-mysql")));
 
@@ -15,7 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ToDoDbContext>(options => 
     options.UseMySql(connectionString, 
-    Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.22-13 -mysql")));
+    ServerVersion.AutoDetect(connectionString)));
 
 
  builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
